@@ -49,6 +49,7 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests()
 				.requestMatchers("/signup", "/js/signup.js").anonymous()
 				.requestMatchers(toH2Console()).permitAll()
+				.requestMatchers("/", "/js/app.js", "/api/v1/user/loggedin").permitAll()
 				.requestMatchers("/restricted", "/js/restricted.js", "/api/v1/users").hasRole("MANAGER")
 				.requestMatchers("/api/v1/register").permitAll()
 				.anyRequest().authenticated()

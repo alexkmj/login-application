@@ -40,4 +40,14 @@ public class BasicController {
     public String signup() {
         return "signup";
     }
+
+    /**
+     * The signup page.
+     * 
+     * @return the signup page
+     */
+    @RequestMapping("/")
+    public String home() {
+        return "index";
+    }
 }

@@ -128,4 +128,21 @@ public class UserApiController {
 
         return map;
     }
+
+    /**
+     * Check if the user is currently logged in.
+     * 
+     */
+    @RequestMapping(value = "/api/v1/user/loggedin", method = RequestMethod.GET)
+    public Map<String, Object> isLoggedIn(@AuthenticationPrincipal SecurityUser user) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        if (user == null) {
+            map.put("loggedin", false);
+        } else {
+            map.put("loggedin", true);
+        }
+
+        return map;
+    }
 }
