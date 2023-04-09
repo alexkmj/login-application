@@ -6,11 +6,11 @@ mvn spring-boot:run
 
 # Instructions
 
-By default, the application will run on port 8080. It will also create two
+By default, the application will run on port `8080`. It will also create two
 users, namely `user` and `admin`. Both users have the password `password`.
 
-Users will have to login to access the application. Managers will have access
-to the restricted page. Managers can set other users as managers.
+Users will have to login to access the application. Managers will have access to
+the restricted page. Managers can set other users as managers.
 
 # Pages
 
@@ -32,9 +32,9 @@ The application is a simple login application that allows users to login and
 access a welcome page. Managers can also access a restricted page. Managers can
 also set other users as managers. The application uses Spring Boot Security to
 handle authentication and authorization. The application uses h2 as a database
-to store users and their roles. The application uses React.js and Material UI
-to create the frontend. The application uses Spring Boot Web to create the
-REST API endpoints.
+to store users and their roles. The application uses React.js and Material UI to
+create the frontend. The application uses Spring Boot Web to create the REST API
+endpoints.
 
 # Pages
 
