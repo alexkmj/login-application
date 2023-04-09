@@ -116,3 +116,10 @@ the `t` function. The `t` function wraps the text that needs to be translated.
 The `t` function can take in a string or a string and the namespace. The
 namespace are the context of the string. If no namespace is provided, the
 default namespace is used.
+
+Alternatively, other frameworks could be used. The procedure is similar to
+`react-i18next`. There is generally a wrapper function that wraps the text that
+needs to be translated. The wrapper function can take in a string to be
+translated as well as the context. Sometimes, the framework provides a tool
+to extract the strings that need to be translated which allows us to update the
+translation files.
