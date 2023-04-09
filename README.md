@@ -47,8 +47,6 @@ REST API endpoints.
 
 # API
 
-Table
-
 | API                 | Method | Roles          | Description          |
 | ------------------- | ------ | -------------- | -------------------- |
 | `/api/v1/users`     | `GET`  | `ROLE_USER`    | Get user information |
