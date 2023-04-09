@@ -1,30 +1,74 @@
 # Login Application
 
-```
+Welcome to the Login Application! This is a simple login application that allows
+users to login and access a welcome page. Managers can also access a restricted
+page and set other users as managers.
+
+# Getting Started
+
+To get started, first ensure you have **Maven** installed. Then run the
+following command:
+
+```bash
 mvn spring-boot:run
 ```
 
-# Instructions
+This will start the application on port `8080`. You can then navigate to
+`http://localhost:8080/` to access the home page. The application will also
+create two users, namely `user` and `admin`. Both users have the password
+`password`.
 
-By default, the application will run on port `8080`. It will also create two
-users, namely `user` and `admin`. Both users have the password `password`.
+If you prefer, you can also set up the application in your preferred IDE and run
+it from there.
 
-Users will have to login to access the application. Managers will have access to
-the restricted page. Managers can set other users as managers.
+# Screenshots
+
+Here are some screenshots of the Login Application:
+
+<details>
+  <summary>Click to view Screenshots</summary>
+
+## Home Page
+
+![Home Page](screenshots/home.png)
+
+## Signup Page
+
+![Signup Page](screenshots/signup.png)
+
+## Login Page
+
+![Login Page](screenshots/login.png)
+
+## Logout Page
+
+![Logout Page](screenshots/logout.png)
+
+## Welcome Page
+
+![Welcome Page](screenshots/welcome.png)
+
+## Restricted Page
+
+![Restricted Page](screenshots/restricted.png)
+</details>
 
 # Pages
+
+The Login Application has the following pages:
 
 - `/` - Home page that can be accessed by anyone
 - `/login` - Login page
 - `/logout` - Logout page
 - `/welcome` - Welcome page that can only be accessed by logged in users
 - `/restricted` - Restricted page that can only be accessed by managers
+- `/signup` - Signup page that allows users to create a new account
 
 # Stack
 
-The backend is written in Java using Spring Boot. Specifically, Spring Boot Web
-and Spring Boot Security are used. The frontend is written in HTML and CSS with
-the help of React.js and Material UI.
+The backend is written in *Java* using *Spring Boot*. Specifically,
+*Spring Boot Web* and *Spring Boot Security* are used. The frontend is written
+in *HTML* and *CSS* with the help of *React.js* and *Material UI*.
 
 # Explaination
 
@@ -46,6 +90,8 @@ endpoints.
 - `/signup` - Signup page that allows users to create a new account
 
 # API
+
+The Login Application has the following API endpoints:
 
 | API                 | Method | Roles          | Description          |
 | ------------------- | ------ | -------------- | -------------------- |
