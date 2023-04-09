@@ -114,19 +114,29 @@ public class UserApiController {
 
         // check if any of the parameters are missing
         if (name == null || username == null || password == null) {
-            map.put("error", "Missing parameters");
+            map.put("error", "Invalid userid or password or name");
             return map;
         }
 
         if (password.length() < 1) {
-            map.put("error", "Empty password");
+            map.put("error", "Invalid userid or password or name");
+            return map;
+        }
+
+        if (name.length() < 1) {
+            map.put("error", "Invalid userid or password or name");
+            return map;
+        }
+
+        if (username.length() < 1) {
+            map.put("error", "Invalid userid or password or name");
             return map;
         }
 
         // check if the username is already taken
         Optional<User> user = userService.findByUsername(username);
         if (user.isPresent()) {
-            map.put("error", "Username has been taken");
+            map.put("error", "Invalid userid or passwordn or name");
             return map;
         }
 
