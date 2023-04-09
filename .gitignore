@@ -199,6 +199,8 @@ README.html
 *.iml
 .idea
 .exercism
+.metals
+.bloop
 
 *.db
 metals.*
