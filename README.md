@@ -114,11 +114,10 @@ For internationalization, the application could have used `react-i18next` which
 is a popular internationalization framework for React.js. However, I did not use
 this framework because I wanted to keep the application as simple as possible.
 
-The way it works is by using the `Trans` component from `react-i18next` with
-the `t` function. The `t` function wraps the text that needs to be translated.
-The `t` function can take in a string or a string and the namespace. The
-namespace are the context of the string. If no namespace is provided, the
-default namespace is used.
+The `t` function wraps the text that needs to be translated. The `t` function
+can take in a string or a string and the namespace. The namespace are the
+context of the string. If no namespace is provided, the default namespace is
+used.
 
 ## Others
 
