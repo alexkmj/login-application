@@ -107,6 +107,9 @@ The Login Application has the following API endpoints:
 
 # Internationalization Frameworks
 
+
+## React-i18next
+
 For internationalization, the application could have used `react-i18next` which
 is a popular internationalization framework for React.js. However, I did not use
 this framework because I wanted to keep the application as simple as possible.
@@ -116,6 +119,8 @@ the `t` function. The `t` function wraps the text that needs to be translated.
 The `t` function can take in a string or a string and the namespace. The
 namespace are the context of the string. If no namespace is provided, the
 default namespace is used.
+
+## Others
 
 Alternatively, other frameworks could be used. The procedure is similar to
 `react-i18next`. There is generally a wrapper function that wraps the text that
