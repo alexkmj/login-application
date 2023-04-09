@@ -4,6 +4,9 @@ Welcome to the Login Application! This is a simple login application that allows
 users to login and access a welcome page. Managers can also access a restricted
 page and set other users as managers.
 
+This documentation might be a bit verbose, but this is to ensure that the code
+is as clear as possible.
+
 # Getting Started
 
 To get started, first ensure you have **Maven** installed. Then run the
