@@ -49,16 +49,17 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests()
 				.requestMatchers("/signup", "/js/signup.js").anonymous()
 				.requestMatchers(toH2Console()).permitAll()
-				.requestMatchers("/", "/js/app.js", "/api/v1/user/loggedin").permitAll()
-				.requestMatchers("/restricted", "/js/restricted.js", "/api/v1/users").hasRole("MANAGER")
-				.requestMatchers("/api/v1/register").permitAll()
+				.requestMatchers("/", "/js/home.js", "/js/custom-app-bar.js").permitAll()
+				.requestMatchers("/restricted", "/js/restricted.js").hasRole("MANAGER")
+				.requestMatchers("/api/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.defaultSuccessUrl("/welcome", true)
 				.and()
 				.csrf().disable()
-				.authenticationProvider(authenticationProvider());;
+				.authenticationProvider(authenticationProvider());
+		;
 
 		// development only
 		http.headers().frameOptions().sameOrigin();

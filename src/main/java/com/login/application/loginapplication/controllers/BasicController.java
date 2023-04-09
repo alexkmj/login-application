@@ -1,10 +1,7 @@
 package com.login.application.loginapplication.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.login.application.loginapplication.repositories.UserRepository;
-import com.login.application.loginapplication.services.UserService;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -16,7 +13,7 @@ public class BasicController {
      * 
      * @return the welcome page
      */
-	@RequestMapping("/welcome")
+	@GetMapping("/welcome")
     public String welcome() {
         return "welcome";
     }
@@ -26,7 +23,7 @@ public class BasicController {
      * 
      * @return the login page
      */
-    @RequestMapping("/restricted")
+    @GetMapping("/restricted")
     public String restricted() {
         return "restricted";
     }
@@ -36,7 +33,7 @@ public class BasicController {
      * 
      * @return the signup page
      */
-    @RequestMapping("/signup")
+    @GetMapping("/signup")
     public String signup() {
         return "signup";
     }
@@ -46,7 +43,7 @@ public class BasicController {
      * 
      * @return the signup page
      */
-    @RequestMapping("/")
+    @GetMapping("/")
     public String home() {
         return "index";
     }

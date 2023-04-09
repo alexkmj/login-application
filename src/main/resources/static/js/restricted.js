@@ -26,7 +26,9 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    fetch("/api/v1/users")
+    fetch("/api/v1/all-users", {
+      method: "GET",
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({ users: data });
@@ -35,55 +37,42 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
-        <AppBar
-          position="static"
-          sx={{ backgroundColor: "#FFFFFF", color: "#5F249F" }}
-        >
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Login Application
-            </Typography>
-            <Button color="inherit" href="/logout">
-              Logout
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Container maxWidth="md" sx={{ marginTop: 4 }}>
-          <Typography component="h1" variant="h5">
-            Restricted Page!
-          </Typography>
-          <TableContainer component={Paper} elevation="3" sx={{ marginTop: 4 }}>
-            <Table aria-label="user information">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ color: "#5F249F" }}>ID</TableCell>
-                  <TableCell sx={{ color: "#5F249F" }}>Username</TableCell>
-                  <TableCell sx={{ color: "#5F249F" }}>Name</TableCell>
-                  <TableCell sx={{ color: "#5F249F" }}>Is Manager</TableCell>
-                  <TableCell sx={{ color: "#5F249F" }}>Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.users.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell component="th" scope="row">
-                      {user.id}
-                    </TableCell>
-                    <TableCell>{user.username}</TableCell>
-                    <TableCell>{user.name}</TableCell>
-                    <TableCell>{user.manager ? "Yes" : "No"}</TableCell>
-                    <TableCell>
-                      { !user.manager && (
-                        <Button
+      <Container maxWidth="md" sx={{ marginTop: 4 }}>
+        <Typography component="h1" variant="h5">
+          Restricted Page!
+        </Typography>
+        <TableContainer component={Paper} elevation="3" sx={{ marginTop: 4 }}>
+          <Table aria-label="user information">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ color: "#5F249F" }}>ID</TableCell>
+                <TableCell sx={{ color: "#5F249F" }}>Username</TableCell>
+                <TableCell sx={{ color: "#5F249F" }}>Name</TableCell>
+                <TableCell sx={{ color: "#5F249F" }}>Is Manager</TableCell>
+                <TableCell sx={{ color: "#5F249F" }}>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.users.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell component="th" scope="row">
+                    {user.id}
+                  </TableCell>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.manager ? "Yes" : "No"}</TableCell>
+                  <TableCell>
+                    {!user.manager && (
+                      <Button
                         onClick={() => {
-                          fetch("/api/v1/user/manager", {
-                            method: "POST",
+                          fetch("/api/v1/users", {
+                            method: "PUT",
                             headers: {
                               "Content-Type": "application/json",
                             },
                             body: JSON.stringify({
                               username: user.username,
+                              field: "isManager",
                             }),
                           })
                             .then((response) => response.json())
@@ -96,15 +85,14 @@ class Login extends React.Component {
                       >
                         Make Manager
                       </Button>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Container>
-      </div>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
     );
   }
 }

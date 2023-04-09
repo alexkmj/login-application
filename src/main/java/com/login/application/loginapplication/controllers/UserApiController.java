@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,12 +40,29 @@ public class UserApiController {
     private final UserRepository userRepository;
 
     /**
+     * Get all users if the user is a manager. Otherwise return an empty list.
+     * 
+     * @param user the user
+     * @return List of users
+     */
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(value="/api/v1/all-users", method=RequestMethod.GET)
+    public List<User> getUsers(@AuthenticationPrincipal SecurityUser user) {
+        if (!user.getUser().isManager()) {
+            return new LinkedList<>();
+        }
+
+        return userService.getUsers();
+    }
+
+    /**
      * Get the current user.
      * 
      * @param user the user
      * @return Map with the user's name, username and if the user is a manager
      */
-    @RequestMapping("/api/v1/user")
+    @Secured("ROLE_USER")
+    @RequestMapping(value="/api/v1/users", method=RequestMethod.GET)
     public Map<String, Object> getUser(@AuthenticationPrincipal SecurityUser user) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", user.getUser().getName());
@@ -56,26 +73,11 @@ public class UserApiController {
     }
 
     /**
-     * Get all users if the user is a manager. Otherwise return an empty list.
-     * 
-     * @param user the user
-     * @return List of users
-     */
-    @RequestMapping("/api/v1/users")
-    public List<User> getUsers(@AuthenticationPrincipal SecurityUser user) {
-        if (!user.getUser().isManager()) {
-            return new LinkedList<>();
-        }
-
-        return userService.getUsers();
-    }
-
-    /**
      * Create a new user if the username is not already taken.
      * 
      * @return Map with either an error or success message
      */
-    @RequestMapping(value = "/api/v1/register", method = RequestMethod.POST, consumes = "application/json")
+    @RequestMapping(value="/api/v1/users", method=RequestMethod.POST)
     public Map<String, Object> createUser(@RequestBody Map<String, Object> payload) {
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -108,12 +110,23 @@ public class UserApiController {
      * 
      * @param username
      */
-    @RequestMapping(value = "/api/v1/user/manager", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Secured("ROLE_MANAGER")
+    @RequestMapping(value="/api/v1/users", method=RequestMethod.PUT)
     public Map<String, Object> setManager(@RequestBody Map<String, Object> payload) {
         Map<String, Object> map = new HashMap<String, Object>();
 
+        String field = (String) payload.get("field");
         String username = (String) payload.get("username");
+
+        if (field == null || username == null) {
+            map.put("error", "Missing parameters");
+            return map;
+        }
+
+        if (!field.equals("isManager")) {
+            map.put("error", "Invalid field");
+            return map;
+        }
 
         Optional<User> user = userService.findByUsername(username);
         if (user.isEmpty()) {
@@ -133,7 +146,7 @@ public class UserApiController {
      * Check if the user is currently logged in.
      * 
      */
-    @RequestMapping(value = "/api/v1/user/loggedin", method = RequestMethod.GET)
+    @RequestMapping(value="/api/v1/user/loggedin", method=RequestMethod.POST)
     public Map<String, Object> isLoggedIn(@AuthenticationPrincipal SecurityUser user) {
         Map<String, Object> map = new HashMap<String, Object>();
 
