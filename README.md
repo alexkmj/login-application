@@ -1,5 +1,7 @@
 # Login Application
 
+[![Java CI with Maven](https://github.com/alexkmj/login-application/actions/workflows/maven.yml/badge.svg)](https://github.com/alexkmj/login-application/actions/workflows/maven.yml)
+
 Welcome to the Login Application! This is a simple login application that allows
 users to login and access a welcome page. Managers can also access a restricted
 page and set other users as managers.
