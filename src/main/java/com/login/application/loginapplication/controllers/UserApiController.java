@@ -118,6 +118,11 @@ public class UserApiController {
             return map;
         }
 
+        if (password.length() < 1) {
+            map.put("error", "Empty password");
+            return map;
+        }
+
         // check if the username is already taken
         Optional<User> user = userService.findByUsername(username);
         if (user.isPresent()) {
