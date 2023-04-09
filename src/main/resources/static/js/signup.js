@@ -1,26 +1,42 @@
 const {
   Button,
   Typography,
-  AppBar,
-  Toolbar,
-  Paper,
   TextField,
   Link,
   Container,
   Box,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
   Grid,
 } = MaterialUI;
 
+/**
+ * Signup component for user registration.
+ * 
+ * @class
+ * 
+ * @author Alex Koh
+ * 
+ * @extends React.Component
+ */
 class Signup extends React.Component {
+  /**
+   * Constructor for Signup component.
+   * 
+   * @constructor
+   * @param {Object} props - Props passed to Signup component
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * State object for Signup component
+     * 
+     * @type {Object}
+     * 
+     * @property {string} name - Name of user
+     * @property {string} username - Username of user
+     * @property {string} password - Password of user
+     * @property {string} confirmPassword - Password confirmation of user
+     */
     this.state = {
       name: "",
       username: "",
@@ -29,12 +45,20 @@ class Signup extends React.Component {
     };
   }
 
+  /**
+   * Submit function for Signup component.
+   * 
+   * @function
+   * @returns {void}
+   */
   submit() {
+    // check if passwords match
     if (this.state.password !== this.state.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
+    // create user and redirect to login page if successful
     fetch("/api/v1/users", {
       method: "POST",
       headers: {
@@ -56,6 +80,11 @@ class Signup extends React.Component {
       });
   }
 
+  /**
+   * Render function for Signup component.
+   * 
+   * @returns {JSX.Element} - Signup component UI
+   */
   render() {
     return (
       <Container maxWidth="sm" sx={{ marginTop: 4 }}>

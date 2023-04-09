@@ -8,8 +8,16 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * The Class SecurityUser. This class is used to create a UserDetails object
- * from a User object.
+ * The SecurityUser class implements the @{link UserDetails} interface and is
+ * used to create a @{link UserDetails} object from a @{link User} object. This
+ * is used by Spring Security to authenticate users.
+ * 
+ * {@link UserDetails} is an interface that represents a user's information
+ * that is used by Spring Security to authenticate users.
+ * 
+ * @see org.springframework.security.core.userdetails.UserDetails
+ * 
+ * @author Alex Koh
  */
 public class SecurityUser implements UserDetails {
     /**
@@ -19,6 +27,7 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Instantiates a new security user.
+     * 
      * @param user the user
      */
     public SecurityUser(User user) {
@@ -26,7 +35,11 @@ public class SecurityUser implements UserDetails {
     }
 
     /**
-     * Gets the authorities.
+     * Gets the authorities. If the user is a manager, they are granted the
+     * `ROLE_MANAGER` and `ROLE_USER` roles. Otherwise, they are granted the
+     * `ROLE_USER` role.
+     * 
+     * @return the authorities
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,6 +50,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Gets the username.
+     * 
+     * @return the username
      */
     @Override
     public String getUsername() {
@@ -45,6 +60,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Gets the password.
+     * 
+     * @return the password
      */
     @Override
     public String getPassword() {
@@ -53,6 +70,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Checks if is account non expired.
+     * 
+     * @return true, if is account non expired
      */
     @Override
     public boolean isAccountNonExpired() {
@@ -61,6 +80,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Checks if is account non locked.
+     * 
+     * @return true, if is account non locked
      */
     @Override
     public boolean isAccountNonLocked() {
@@ -69,6 +90,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Checks if is credentials non expired.
+     * 
+     * @return true, if is credentials non expired
      */
     @Override
     public boolean isCredentialsNonExpired() {
@@ -77,6 +100,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Checks if is enabled.
+     * 
+     * @return true, if is enabled
      */
     @Override
     public boolean isEnabled() {
@@ -85,7 +110,8 @@ public class SecurityUser implements UserDetails {
 
     /**
      * Gets the user.
-     * @return
+     * 
+     * @return the user
      */
     public User getUser() {
         return user;

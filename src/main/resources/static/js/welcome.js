@@ -1,25 +1,44 @@
 const {
   Button,
-  Typography,
-  AppBar,
-  Toolbar,
-  Paper,
-  TextField,
-  Link,
   Container,
-  Box,
-  TableContainer,
+  Paper,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
+  Typography,
 } = MaterialUI;
 
-class Login extends React.Component {
+/**
+ * A class component that displays a welcome page.
+ * 
+ * @class
+ * 
+ * @author Alex Koh
+ * 
+ * @extends React.Component
+ */
+class Welcome extends React.Component {
+  /**
+   * Constructs the Login component with its initial state.
+   * 
+   * @param {Object} props - The props object. 
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * The state object that contains the user's name, username, and whether or
+     * not the user is a manager.
+     * 
+     * @type {Object}
+     * 
+     * @property {string} name - The user's name.
+     * @property {string} username - The user's username.
+     * @property {boolean} isManager - Whether or not the user is a manager.
+     */
     this.state = {
       name: "",
       username: "",
@@ -27,6 +46,10 @@ class Login extends React.Component {
     };
   }
 
+  /**
+   * Invoked immediately after the component is mounted. Fetches the user's
+   * information from the server.
+   */
   componentDidMount() {
     fetch("/api/v1/users", {
       method: "GET",
@@ -39,6 +62,11 @@ class Login extends React.Component {
       });
   }
 
+  /**
+   * Renders the welcome page component
+   * 
+   * @returns {JSX.Element} The JSX element to render.
+   */
   render() {
     return (
       <Container maxWidth="md" sx={{ marginTop: 4 }}>
@@ -85,4 +113,4 @@ class Login extends React.Component {
   }
 }
 
-ReactDOM.render(<Login />, document.getElementById("root"));
+ReactDOM.render(<Welcome />, document.getElementById("root"));

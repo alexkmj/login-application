@@ -1,7 +1,15 @@
-const { Button, Typography, AppBar, Toolbar, IconButton, MenuIcon } =
-  MaterialUI;
+const { Typography } = MaterialUI;
 
-class App extends React.Component {
+/**
+ * App component that renders the homepage of the login application.
+ * 
+ * @class
+ * 
+ * @author Alex Koh
+ * 
+ * @extends React.Component
+ */
+class Home extends React.Component {
   render() {
     return (
       <div style={{ padding: 16 }}>
@@ -13,4 +21,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("home"));
+ReactDOM.render(<Home />, document.getElementById("home"));

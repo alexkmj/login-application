@@ -14,34 +14,46 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 /**
- * This class is used to configure the security of the application.
+ * Configures the security of the application. This class is used to configure
+ * the security filter chain and the authentication provider.
+ * 
+ * The security filter chain is used to configure the security of the
+ * application. The {@link Configuration} annotation is used to specify that
+ * this class is a configuration class.
+ * 
+ * The authentication provider is used to configure the authentication
+ * mechanism. The {@link EnableWebSecurity} annotation is used to enable Spring
+ * Security for the application.
+ * 
+ * @author Alex Koh
  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 	/**
-	 * The UserDetailsService object.
+	 * The user details service used for authentication.
 	 */
 	private final UserDetailsService userDetailsService;
 
 	/**
-	 * Constructor.
+	 * Constructs a new WebSecurityConfig object. 
 	 * 
-	 * @param userDetailsService the UserDetailsService object
+	 * @param userDetailsService the user details service used for authentication
 	 */
 	public WebSecurityConfig(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
 	/**
-	 * This method is used to configure the security of the application. It is
-	 * used to configure the authentication and authorization of the
-	 * application.
+     * Configures the security filter chain for the application.
 	 * 
-	 * @param http the HttpSecurity object
-	 * @return the SecurityFilterChain object
-	 * @throws Exception
-	 */
+	 * The {@link @Bean} annotation is used to mark this method as a bean. This
+	 * bean is used by Spring to create an instance of this object.
+     *
+     * @param http the HttpSecurity object
+     * @return the SecurityFilterChain object
+     * @throws Exception if an error occurs during configuration
+     */
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)
 			throws Exception {
@@ -57,21 +69,27 @@ public class WebSecurityConfig {
 				.formLogin()
 				.defaultSuccessUrl("/welcome", true)
 				.and()
-				.csrf().disable()
+				.csrf().disable() // TODO: Remove this in production environment
 				.authenticationProvider(authenticationProvider());
-		;
 
-		// development only
+		// Allow H2 console to be displayed in development environment
+		// TODO: Remove this in production environment
 		http.headers().frameOptions().sameOrigin();
 
 		return http.build();
 	}
 
 	/**
-	 * This method is used to configure the authentication provider.
+     * Configures the authentication provider for the application.
 	 * 
-	 * @return the AuthenticationProvider object
-	 */
+	 * @{link DaoAuthenticationProvider} is used to authenticate users using a
+	 * database.
+	 * 
+	 * The {@link @Bean} annotation is used to mark this method as a bean. This
+	 * bean is used by Spring to create an instance of this object.
+     *
+     * @return the DaoAuthenticationProvider object
+     */
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -81,10 +99,16 @@ public class WebSecurityConfig {
 	}
 
 	/**
-	 * This method is used to configure the password encoder.
+     * Configures the password encoder for the application.
 	 * 
-	 * @return the PasswordEncoder object
-	 */
+	 * @{link BCryptPasswordEncoder} is used to encode passwords using the
+	 * BCrypt hashing algorithm.
+	 * 
+	 * The {@link @Bean} annotation is used to mark this method as a bean. This
+	 * bean is used by Spring to create an instance of this object.
+     *
+     * @return the BCryptPasswordEncoder object
+     */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

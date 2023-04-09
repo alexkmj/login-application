@@ -1,30 +1,65 @@
 const {
   Button,
-  Typography,
-  AppBar,
-  Toolbar,
-  Paper,
-  TextField,
-  Link,
   Container,
-  Box,
-  TableContainer,
+  Paper,
   Table,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
+  Typography,
 } = MaterialUI;
 
-class Login extends React.Component {
+/**
+ * The Restricted component displays a restricted page that can only be accessed
+ * by authenticated users. It fetches a list of users from the server and
+ * displays them in a table. If the current user is a manager, they can promote
+ * other users to become managers as well.
+ * 
+ * @class
+ * 
+ * @author Alex Koh
+ * 
+ * @extends React.Component
+ */
+class Restricted extends React.Component {
+  /**
+   * The primary color of the application.
+   * 
+   * @type {string}
+   * 
+   * @constant
+   */
+  primaryColor = "#5F249F";
+
+  /**
+   * Constructs the Restricted component.
+   * 
+   * @param {Object} props - The props object passed to the component. 
+   */
   constructor(props) {
     super(props);
 
+    /**
+     * The state object that contains the list of users.
+     * 
+     * @type {Object}
+     * 
+     * @property {Array} users - The list of users. Defaults to an empty array.
+     */
     this.state = {
       users: [],
     };
   }
 
+  /**
+   * Invoked immediately after the component is mounted. Fetches the list of
+   * users from the server.
+   *
+   * @function
+   * @returns {void}
+   */
   componentDidMount() {
     fetch("/api/v1/all-users", {
       method: "GET",
@@ -35,6 +70,12 @@ class Login extends React.Component {
       });
   }
 
+  /**
+   * Renders the component.
+   *
+   * @function
+   * @returns {JSX.Element}
+   */
   render() {
     return (
       <Container maxWidth="md" sx={{ marginTop: 4 }}>
@@ -45,11 +86,11 @@ class Login extends React.Component {
           <Table aria-label="user information">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ color: "#5F249F" }}>ID</TableCell>
-                <TableCell sx={{ color: "#5F249F" }}>Username</TableCell>
-                <TableCell sx={{ color: "#5F249F" }}>Name</TableCell>
-                <TableCell sx={{ color: "#5F249F" }}>Is Manager</TableCell>
-                <TableCell sx={{ color: "#5F249F" }}>Actions</TableCell>
+                <TableCell sx={{ color: this.primaryColor }}>ID</TableCell>
+                <TableCell sx={{ color: this.primaryColor }}>Username</TableCell>
+                <TableCell sx={{ color: this.primaryColor }}>Name</TableCell>
+                <TableCell sx={{ color: this.primaryColor }}>Is Manager</TableCell>
+                <TableCell sx={{ color: this.primaryColor }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -97,4 +138,4 @@ class Login extends React.Component {
   }
 }
 
-ReactDOM.render(<Login />, document.getElementById("root"));
+ReactDOM.render(<Restricted />, document.getElementById("root"));
